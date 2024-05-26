@@ -23,7 +23,8 @@ services:
       - flask
     networks:
       - app-network
-    # volumes:
+    volumes:
+      - ./public:/app/public
     #   - ./certs:/etc/nginx/ssl
     #   - ./nginx.conf:/etc/nginx/nginx.conf:ro
 
