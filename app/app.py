@@ -3,6 +3,7 @@ import logging
 import csv
 from datetime import datetime
 from hashlib import sha256
+import pytz
 
 logging.basicConfig(filename="data/api.log", format="%(asctime)s %(levelname)s : %(message)s", level=logging.DEBUG)
 app = Flask(__name__)
@@ -36,7 +37,7 @@ def getLatestData(number):
 
 @app.route("/get/query-date/<string:date>", methods=["GET"])
 def getSingleDateData(date):
-    date = date.replace("-", "/").replace(".", "/")
+    date = date.replace(".", "-")
     data = readDataFromCsv()
     data["entries"] = list(filter(lambda e: date in e["timestamp"], data["entries"]))
     return data, 200
@@ -73,7 +74,7 @@ def verifyData(data):
 def storeDataToCsv(data):
     success = False
 
-    timestamp =  datetime.now().strftime("%d/%m/%Y, %H:%M:%S")
+    timestamp =  datetime.now(pytz.timezone("Europe/Rome")).strftime("%Y-%m-%dT%H:%M:%S")
     try:
         with open("data/data.csv", "a", newline="") as csvfile:
             writer = csv.writer(csvfile, delimiter=",", quotechar='"')

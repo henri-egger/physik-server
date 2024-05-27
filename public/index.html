@@ -1,14 +1,33 @@
 <!DOCTYPE html>
 <html>
+
 <head>
   <meta charset='utf-8'>
   <meta http-equiv='X-UA-Compatible' content='IE=edge'>
   <title>Wasserstandsmesser</title>
   <meta name='viewport' content='width=device-width, initial-scale=1'>
   <link rel='stylesheet' type='text/css' media='screen' href='styles.css'>
-  <script src='index.js'></script>
+  <script defer src='index.js'></script>
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.min.js"></script>
 </head>
+
 <body>
   <h1>Wasserstandsmesser</h1>
+  <div class="card">
+    <p class="time">
+      <small id="current-t">...</small>
+    </p>
+    <h3 class="measurment">
+      Wasserstand: <b id="current-h">...</b><b> m</b>
+    </h3>
+  </div>
+
+  <!--<div class="chartCard">
+    <div class="chartBox">
+      <canvas id="myChart"></canvas>
+    </div>
+  </div>-->
+
 </body>
+
 </html>
