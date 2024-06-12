@@ -32,7 +32,10 @@ def getAllData():
 @app.route("/get/latest/<int:number>", methods=["GET"])
 def getLatestData(number):
     data = readDataFromCsv()
-    data["entries"] = data["entries"][len(data["entries"]) - number::]
+    
+    if len(data["entries"]) > number:
+        data["entries"] = data["entries"][len(data["entries"]) - number::]
+    
     return data, 200
 
 @app.route("/get/query-date/<string:date>", methods=["GET"])
