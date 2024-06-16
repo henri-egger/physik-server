@@ -104,3 +104,9 @@ p {
   border: 1px solid rgba(0, 0, 0, 0.1);
   margin: 0;
 }
+
+/* Beta Warning */
+.beta-warning {
+  background-color: rgb(255 229 189);
+  padding: 1rem;
+}
