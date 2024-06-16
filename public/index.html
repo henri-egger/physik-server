@@ -1,33 +1,89 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Wasserstandsmesser</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" media="screen" href="styles.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+      href="responsive.css"
+    />
+    <script defer src="index.js"></script>
+    <script
+      type="text/javascript"
+      src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.min.js"
+    ></script>
+    <script src="https://cdn.jsdelivr.net/npm/luxon@^2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-luxon@^1"></script>
+    <!-- Matomo -->
+    <script type="text/plain" data-category="analytics">
+      var _paq = (window._paq = window._paq || []);
+      /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+      _paq.push(["trackPageView"]);
+      _paq.push(["enableLinkTracking"]);
+      (function () {
+        var u = "https://wasserstandeisack.matomo.cloud/";
+        _paq.push(["setTrackerUrl", u + "matomo.php"]);
+        _paq.push(["setSiteId", "1"]);
+        var d = document,
+          g = d.createElement("script"),
+          s = d.getElementsByTagName("script")[0];
+        g.async = true;
+        g.src =
+          "https://cdn.matomo.cloud/wasserstandeisack.matomo.cloud/matomo.js";
+        s.parentNode.insertBefore(g, s);
+      })();
+    </script>
+    <!-- End Matomo Code -->
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.0.1/dist/cookieconsent.css"
+    />
+  </head>
 
-<head>
-  <meta charset='utf-8'>
-  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-  <title>Wasserstandsmesser</title>
-  <meta name='viewport' content='width=device-width, initial-scale=1'>
-  <link rel='stylesheet' type='text/css' media='screen' href='styles.css'>
-  <script defer src='index.js'></script>
-  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/chart.js/dist/chart.umd.min.js"></script>
-</head>
+  <body>
+    <nav>
+      <h1>
+        Wasserstandsmesser
+        <br />
+        am Eisack
+      </h1>
+    </nav>
 
-<body>
-  <h1>Wasserstandsmesser</h1>
-  <div class="card">
-    <p class="time">
-      <small id="current-t">...</small>
-    </p>
-    <h3 class="measurment">
-      Wasserstand: <b id="current-h">...</b><b> m</b>
-    </h3>
-  </div>
+    <div class="container">
+      <div class="content">
+        <div class="card">
+          <p class="time">
+            <small id="current-t">...</small>
+          </p>
+          <h3 class="measurment">
+            Wasserstand: <b id="current-h">...</b><b> m</b>
+          </h3>
+        </div>
 
-  <div class="card chart-card">
-    <div class="chartBox">
-      <canvas id="myChart"></canvas>
+        <div class="charts">
+          <div class="chartBox card chart-card">
+            <canvas id="shortChart"></canvas>
+          </div>
+
+          <div class="chartBox card chart-card">
+            <canvas id="longChart"></canvas>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
 
-</body>
+    <footer>
+      <small>
+        <a href="/about.html">About</a> |
+        <a data-cc="show-preferencesModal">Cookies</a> | &copy; Henri Egger 2024
+      </small>
+    </footer>
 
+    <script type="module" src="cookieconsent-config.js"></script>
+  </body>
 </html>

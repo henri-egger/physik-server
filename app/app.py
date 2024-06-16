@@ -45,11 +45,28 @@ def getSingleDateData(date):
     data["entries"] = list(filter(lambda e: date in e["timestamp"], data["entries"]))
     return data, 200
 
-# TODO:
-# @app.route("/get/<startDate>/<endDate>", methods=["GET"])
-# def getRangeData(startDate, endDate):
-#     data = readDataFromCsv()
-#     return data, 200
+@app.route("/get/<startDate>/<endDate>", methods=["GET"])
+def getRangeData(startDate, endDate):
+    data = readDataFromCsv()
+
+    startIdx = 0
+    endIdx = 0
+
+    for i, entry in enumerate(data["entries"]):
+        if startDate in entry["timestamp"]:
+            startIdx = i
+            break
+
+    for i, entry in enumerate(data["entries"]):
+        if endDate in entry["timestamp"]:
+            endIdx = i
+
+    if startIdx == endIdx:
+        data["entries"] = []
+    
+    data["entries"] = data["entries"][startIdx:endIdx + 1]
+    
+    return data, 200
 
 @app.route("/logs", methods=["GET"])
 def getLogs():

@@ -1,0 +1,7 @@
+@media screen and (min-width: 1025px) {
+  .charts {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+  }
+}

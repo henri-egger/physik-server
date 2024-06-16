@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Das Projekt</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" type="text/css" media="screen" href="styles.css" />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      media="screen"
+      href="responsive.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/gh/orestbida/cookieconsent@3.0.1/dist/cookieconsent.css"
+    />
+    <!-- Matomo -->
+    <script type="text/plain" data-category="analytics">
+      var _paq = (window._paq = window._paq || []);
+      /* tracker methods like "setCustomDimension" should be called before "trackPageView" */
+      _paq.push(["trackPageView"]);
+      _paq.push(["enableLinkTracking"]);
+      (function () {
+        var u = "https://wasserstandeisack.matomo.cloud/";
+        _paq.push(["setTrackerUrl", u + "matomo.php"]);
+        _paq.push(["setSiteId", "1"]);
+        var d = document,
+          g = d.createElement("script"),
+          s = d.getElementsByTagName("script")[0];
+        g.async = true;
+        g.src =
+          "https://cdn.matomo.cloud/wasserstandeisack.matomo.cloud/matomo.js";
+        s.parentNode.insertBefore(g, s);
+      })();
+    </script>
+    <!-- End Matomo Code -->
+  </head>
+
+  <body>
+    <nav>
+      <a href="/">
+        <h1>
+          Wasserstandsmesser
+          <br />
+          am Eisack
+        </h1>
+      </a>
+    </nav>
+
+    <div class="container about">
+      <p>
+        Der Klimawandel führt immer öfters zu plötzlichen unerwarteten
+        Naturereignissen. Durch starke Regenfälle können die Wasserpegel der
+        Flüsse sehr schnell und stark ansteigen. Der Maturant Henri Egger der
+        Klasse 5bn am Realgymnasium Bozen (Campus Fagen) realisierte das Projekt
+        für eine Messeinrichtung inklusive Datenübermittlung für den
+        Zivilschutz. Das Projekt wurde in Zusammenarbeit mit der Feuerwehr
+        Schrambach in der Gemeinde Feldthurns realisiert, damit man die genauen
+        Bedürfnisse der Feuerwehr und Anforderungen vor Ort kennt und im Projekt
+        implementieren kann. Das Projekt fand im Rahmen der Begabtenförderung am
+        Campus Fagen im fächerübergreifenden Angebot der Fächer Informatik und
+        Physik statt.
+        <br /><br />
+        Ein Drucksensor wird am Grund des Gewässers plaziert, der den
+        hydrostatischen Druck in maximaler Wassertiefe misst. Dieser wird über
+        ein wasserfestes Neoprenkabel zum Mikroprozessor Arduinouno
+        weitergeleitet und in die entsprechende Wasserhöhe der darüber liegenden
+        Wassersäule umgerechnet um anschließend mittels eines GSM-Moduls per
+        Mobilfunk an diese Website zu senden, welche den aktuellen Wasserpegel
+        anzeigt. Neben der aktuellen Wasserhöhe werden auch die Pegel der
+        letzten 6 Stunden und der letzten 2 Tage angezeigt, damit man die
+        kurzfristige und längerfristige Tendenz der Pegelstände erfassen kann.
+        <br /><br />
+        Der Schüler musste die Kalibrierung des Drucksensors bei verschiedenen
+        Kabellängen durchführen, die Pegelanpassung der elektrischen Potentiale
+        der elektronischen Module vornehmen und die Steuersoftware schreiben. Im
+        GSM-Modul wurde eine IoT Daten-SIM-Karte verwendet. Am 13. Juni konnte
+        das fertige Modul an den Feuerwehrkommandanten der Feuerwehr
+        Schrambach/Feldthurns Andreas Kraft übergeben werden und kann dort bei
+        Bedarf beim nächsten Hochwasser eingesetzt werden.
+        <br /><br />
+        Der Schüler hat mit seinem Projekt zur Messung der Wasserpegel einen
+        Beitrag zum Zivilschutz unseres Landes geleistet. Das Projekt wurde von
+        Prof. Federico Diaz-Pfeifer (Informatik) und Prof. Peter Kofler (Physik)
+        begleitet.
+      </p>
+    </div>
+
+    <footer>
+      <small>
+        <a href="/about.html">About</a> |
+        <a data-cc="show-preferencesModal">Cookies</a> | &copy; Henri Egger 2024
+      </small>
+    </footer>
+
+    <script type="module" src="cookieconsent-config.js"></script>
+  </body>
+</html>
