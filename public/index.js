@@ -7,7 +7,7 @@ function formatFetchDateTimestamp(date, withTime) {
     date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1
   }-${date.getDate()}${
     withTime
-      ? "T" + (date.getHours < 10 ? "0" + date.getHours() : date.getHours())
+      ? "T" + (date.getHours() < 10 ? "0" + date.getHours() : date.getHours())
       : ""
   }`;
 }
