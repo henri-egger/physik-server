@@ -24,6 +24,7 @@ services:
     networks:
       - app-network
     volumes:
+      - ./data:/app/data:rw
       - ./public:/app/public
       - ./nginx/conf:/etc/nginx/conf.d:ro
       - ./certbot/www:/var/www/certbot:ro
