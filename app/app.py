@@ -87,7 +87,7 @@ if __name__ == "__main__":
 
 def verifyData(data):
     if not ("height" in data): return "Wrong JSON format"
-    if data["height"] < 0 or data["height"] > 20: return "Height value unrealistic"
+    if data["height"] < 0 or data["height"] > 20: return f"Height value unrealistic: {data['height']}"
 
     return ""
 
