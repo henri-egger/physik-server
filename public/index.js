@@ -90,8 +90,11 @@ function isSensorLive(dataTimestamp) {
 
 function setLiveCircle(isLive) {
   const liveCircle = dqs("#live-circle");
-  liveCircle.classList.add(isLive ? "live-green" : "live-red");
-  liveCircle.title = isLive ? "Der Sensor sendet aktiv Daten" : "Der Sensor sendet keine Daten";
+  if (isLive) {
+    liveCircle.classList.remove("live-red");
+    liveCircle.classList.add("live-green");
+    liveCircle.title = "Der Sensor sendet aktiv Daten";
+  }
 }
 
 function setGraphData(graphData, data) {
