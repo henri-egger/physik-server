@@ -65,6 +65,47 @@ nav, footer {
   z-index: 10;
 }
 
+nav {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+
+@keyframes pulse-animation-green {
+  0% {
+    box-shadow: 0 0 0 0px rgba(123, 255, 47, 0.5);
+  }
+  100% {
+    box-shadow: 0 0 0 10px rgba(123, 255, 47, 0);
+  }
+}
+
+@keyframes pulse-animation-red {
+  0% {
+    box-shadow: 0 0 0 0px rgba(255, 47, 47, 0.5);
+  }
+  100% {
+    box-shadow: 0 0 0 10px rgba(255, 47, 47, 0);
+  }
+}
+
+.live-circle {
+  height: 1rem;
+  width: 1rem;
+  border-radius: 50%;
+}
+
+.live-green {
+  background-color: rgb(123, 255, 47);
+  animation: pulse-animation-green 2s infinite;
+}
+
+.live-red {
+  background-color: rgb(255, 47, 47);
+  animation: pulse-animation-red 2s infinite;
+}
+
 nav a {
   text-decoration: none;
 }

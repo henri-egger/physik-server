@@ -75,6 +75,23 @@ function setCurrentData(data) {
     data.entries[0].timestamp
   );
   dqs("#current-h").innerText = data.entries[0].height;
+
+  setLiveCircle(isSensorLive(data.entries[0].timestamp));
+}
+
+function isSensorLive(dataTimestamp) {
+  const timestamp = new Date(dataTimestamp);
+  const now = new Date();
+  const diffMillis = now.getTime() - timestamp.getTime();
+  const diffMin = diffMillis / 1000 / 60;
+  const maxAllowedLivePauseMin = 10;
+  return diffMin < maxAllowedLivePauseMin;
+}
+
+function setLiveCircle(isLive) {
+  const liveCircle = dqs("#live-circle");
+  liveCircle.classList.add(isLive ? "live-green" : "live-red");
+  liveCircle.title = isLive ? "Der Sensor sendet aktiv Daten" : "Der Sensor sendet keine Daten";
 }
 
 function setGraphData(graphData, data) {
