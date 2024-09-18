@@ -56,7 +56,6 @@ async function fetchCurrentData() {
   // return fetchLatestData(1);
 
   const now = new Date();
-  now.setHours(now.getHours() - 1);
   const data = await fetchDateData(now, true);
   data.entries = [data.entries[data.entries.length - 1]];
   return data;
@@ -85,6 +84,7 @@ function isSensorLive(dataTimestamp) {
   const diffMillis = now.getTime() - timestamp.getTime();
   const diffMin = diffMillis / 1000 / 60;
   const maxAllowedLivePauseMin = 10;
+  console.log(diffMin);
   return diffMin < maxAllowedLivePauseMin;
 }
 
@@ -97,14 +97,6 @@ function setLiveCircle(isLive) {
   }
 }
 
-function setGraphData(graphData, data) {
-  const entries = data.entries;
-  entries.forEach((e) => {
-    graphData.labels.push(e.timestamp);
-    graphData.datasets[0].data.push(e.height);
-  });
-}
-
 function setup() {
   fetchCurrentData()
     .then((data) => setCurrentData(data))
@@ -112,100 +104,102 @@ function setup() {
 
   fetchLastHours(6)
     .then((data) => {
-      setGraphData(shortGraphData, data);
-      new Chart(document.getElementById("shortChart"), shortGraphConfig);
+      const entries = data.entries;
+
+      const ctx = dqs("#shortChart").getContext("2d");
+      new Chart(ctx, {
+        type: "line",
+        data: {
+          labels: mapLabels(entries), // x-axis data (timestamps)
+          datasets: [
+            {
+              label: "Letzte 6 Stunden",
+              data: mapHeights(entries), // y-axis data (heights)
+              segment: {
+                borderColor: (ctx) => calcColor(ctx, "1"),
+                backgroundColor: (ctx) => calcColor(ctx, "0.5"),
+              },
+            },
+          ],
+        },
+        options: chartOptions,
+      });
     })
     .catch((err) => console.error(err));
 
   fetchLastHours(48)
     .then((data) => {
-      setGraphData(longGraphData, data);
-      new Chart(document.getElementById("longChart"), longGraphConfig);
+      const entries = data.entries;
+
+      const ctx = dqs("#longChart").getContext("2d");
+      new Chart(ctx, {
+        type: "line",
+        data: {
+          labels: mapLabels(entries), // x-axis data (timestamps)
+          datasets: [
+            {
+              label: "Letzte 48 Stunden",
+              data: mapHeights(entries), // y-axis data (heights)
+              segment: {
+                borderColor: (ctx) => calcColor(ctx, "1"),
+                backgroundColor: (ctx) => calcColor(ctx, "0.5"),
+              },
+            },
+          ],
+        },
+        options: chartOptions,
+      });
     })
     .catch((err) => console.error(err));
 }
 
-// Charts
-const shortGraphData = {
-  labels: [],
-  datasets: [
-    {
-      label: "Letzte 6h",
-      data: [],
-      backgroundColor: ["rgba(54, 162, 235, 0.2)"],
-      borderColor: ["rgba(54, 162, 235, 1)"],
+const chartOptions = {
+  scales: {
+    x: {
+      type: "time", // Handle time-based x-axis
+      time: {
+        unit: "minute", // Customize based on time range (minute, hour, day)
+      },
+      adapters: {
+        date: {
+          locale: "de-AT",
+        },
+      },
+    },
+    y: {
+      beginAtZero: true,
+      title: {
+        display: true,
+        text: "Höhe [cm]",
+      },
+    },
+  },
+  elements: {
+    line: {
+      fill: true, // Fill area
       borderWidth: 1,
+      tension: 0.5,
     },
-  ],
-};
-
-const shortGraphConfig = {
-  type: "line",
-  data: shortGraphData,
-  options: {
-    scales: {
-      y: {
-        beginAtZero: true,
-      },
-      x: {
-        type: 'time',
-        adapters: {
-          date: {
-            locale: "de-AT"
-          }
-        }
-      }
-    },
-    elements: {
-      line: {
-        fill: true,
-      },
-      point: {
-        pointRadius: 0,
-      },
+    point: {
+      radius: 0,
     },
   },
 };
 
-const longGraphData = {
-  labels: [],
-  datasets: [
-    {
-      label: "Letzte 2 Tage",
-      data: [],
-      backgroundColor: ["rgba(54, 162, 235, 0.2)"],
-      borderColor: ["rgba(54, 162, 235, 1)"],
-      borderWidth: 1,
-    },
-  ],
-};
+function mapLabels(entries) {
+  return entries.map((dataPoint) => new Date(dataPoint.timestamp));
+}
 
-const longGraphConfig = {
-  type: "line",
-  data: longGraphData,
-  options: {
-    scales: {
-      y: {
-        beginAtZero: true,
-      },
-      x: {
-        type: 'time',
-        adapters: {
-          date: {
-            locale: "de"
-          }
-        }
-      }
-    },
-    elements: {
-      line: {
-        fill: true,
-      },
-      point: {
-        pointRadius: 0,
-      },
-    },
-  },
-};
+function mapHeights(entries) {
+  return entries.map((dataPoint) => dataPoint.height);
+}
+
+function calcColor(ctx, opacity) {
+  const yPrev = ctx.p0.parsed.y;
+  const yNext = ctx.p1.parsed.y;
+  return yPrev >= 0 && yNext >= 0
+    ? `rgba(54, 162, 235, ${opacity})` // Teal for positive
+    : `rgba(255, 99, 132, ${opacity})`; // Red for negative
+}
 
 setup();
