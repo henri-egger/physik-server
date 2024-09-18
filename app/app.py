@@ -86,10 +86,13 @@ if __name__ == "__main__":
     app.run(debug=True, port=5000)  # Running on the default Flask server for development
 
 def verifyData(data):
-    if not ("height" in data): return "Wrong JSON format"
-    if data["height"] < 0 or data["height"] > 20: return f"Height value unrealistic: {data['height']}"
+    if not ("height" in data) or not ("timestamp" in data):
+        return "Wrong JSON format"
+    else:
+        if (data["height"] < 0 or data["height"] > 2000):
+            app.logger.warning(f"Height value unrealistic: {data['height']}")
 
-    return ""
+        return ""
 
 def storeDataToCsv(data):
     success = False
