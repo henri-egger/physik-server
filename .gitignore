@@ -3,3 +3,4 @@ certs/pass.txt
 data/api.log
 data/data.csv
 genMockData.py
+certbot
