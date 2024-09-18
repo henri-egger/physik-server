@@ -52,13 +52,12 @@ async function fetchDateRangeData(startDate, endDate, withTime) {
 }
 
 async function fetchCurrentData() {
-  // TODO: Switch back to this
-  // return fetchLatestData(1);
+  return fetchLatestData(1);
 
-  const now = new Date();
-  const data = await fetchDateData(now, true);
-  data.entries = [data.entries[data.entries.length - 1]];
-  return data;
+  // const now = new Date();
+  // const data = await fetchDateData(now, true);
+  // data.entries = [data.entries[data.entries.length - 1]];
+  // return data;
 }
 
 async function fetchLastHours(hours) {
