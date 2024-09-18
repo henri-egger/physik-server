@@ -4,3 +4,4 @@ data/api.log
 data/data.csv
 genMockData.py
 certbot
+genDevCerts
