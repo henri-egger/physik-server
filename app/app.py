@@ -86,7 +86,8 @@ if __name__ == "__main__":
     app.run(debug=True, port=5000)  # Running on the default Flask server for development
 
 def verifyData(data):
-    if not ("height" in data) or not ("timestamp" in data):
+    if not ("height" in data):
+        app.logger.warning(f"JSON format: {data}")
         return "Wrong JSON format"
     else:
         if (data["height"] < 0 or data["height"] > 2000):
