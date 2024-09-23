@@ -82,8 +82,7 @@ function isSensorLive(dataTimestamp) {
   const now = new Date();
   const diffMillis = now.getTime() - timestamp.getTime();
   const diffMin = diffMillis / 1000 / 60;
-  const maxAllowedLivePauseMin = 10;
-  console.log(diffMin);
+  const maxAllowedLivePauseMin = 12;
   return diffMin < maxAllowedLivePauseMin;
 }
 
