@@ -168,7 +168,7 @@ const chartOptions = {
       beginAtZero: true,
       title: {
         display: true,
-        text: "Höhe [cm]",
+        // text: "Höhe [cm]",
       },
     },
   },
