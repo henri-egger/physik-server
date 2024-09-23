@@ -49,24 +49,28 @@ def getSingleDateData(date):
 def getRangeData(startDate, endDate):
     data = readDataFromCsv()
 
-    startIdx = 0
-    endIdx = 0
+    start = datetime.fromisoformat(startDate)
+    end = datetime.fromisoformat(endDate)
 
-    for i, entry in enumerate(data["entries"]):
-        if startDate in entry["timestamp"]:
-            startIdx = i
-            break
+    # Initialize an empty list to store the filtered values
+    filtered_data = []
+    app.logger.info(data)
 
-    for i, entry in enumerate(data["entries"]):
-        if endDate in entry["timestamp"]:
-            endIdx = i
+    # Loop through each dictionary in the data
+    for entry in data["entries"]:
+        # Extract the height and timestamp from the dictionary
+        height = float(entry['height'])
+        timestamp_str = entry['timestamp']
 
-    if startIdx == endIdx:
-        data["entries"] = []
+        # Convert the timestamp string to a datetime object
+        timestamp_dt = datetime.fromisoformat(timestamp_str)
+
+        # Check if the timestamp is within the start and end range
+        if start <= timestamp_dt <= end:
+            # If it is, add the height to the filtered list
+            filtered_data.append(entry)
     
-    data["entries"] = data["entries"][startIdx:endIdx + 1]
-    
-    return data, 200
+    return {"entries": filtered_data}, 200
 
 @app.route("/logs", methods=["GET"])
 def getLogs():
