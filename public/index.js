@@ -5,7 +5,9 @@ function dqs(q) {
 function formatFetchDateTimestamp(date, withTime) {
   return `${date.getFullYear()}-${
     date.getMonth() + 1 < 10 ? "0" + (date.getMonth() + 1) : date.getMonth() + 1
-  }-${date.getDate()}${
+  }-${
+    date.getDate() < 10 ? "0" + date.getDate() : date.getDate()
+  }${
     withTime
       ? "T" + (date.getHours() < 10 ? "0" + date.getHours() : date.getHours())
       : ""
