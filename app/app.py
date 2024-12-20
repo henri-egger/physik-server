@@ -51,8 +51,7 @@ def getRangeData(startDate, endDate):
 
     start = datetime.fromisoformat(startDate)
     end = datetime.fromisoformat(endDate)
-    end.minute = 59
-    end.second = 59
+    end.replace(minute = 59, second = 59)
 
     # Initialize an empty list to store the filtered values
     filtered_data = []
